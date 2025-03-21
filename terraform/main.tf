@@ -81,6 +81,20 @@ resource "azurerm_network_interface" "bapt-nic" {
   }
 }
 
+# Define the network interface
+
+resource "azurerm_network_interface" "someone-nic" {
+  name                = "somone-nic"
+  location            = azurerm_resource_group.lizzy.location
+  resource_group_name = azurerm_resource_group.lizzy.name
+
+  ip_configuration {
+    name                          = "someone-ipcfg"
+    subnet_id                     = azurerm_subnet.lizzy.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
+
 # Define the virtual machine
 resource "azurerm_linux_virtual_machine" "lizzyvm" {
   name                = "lizzy-vm"
