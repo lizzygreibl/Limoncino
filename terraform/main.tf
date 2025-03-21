@@ -1,5 +1,5 @@
 # Create a resource group
-resource "azurerm_resource_group" "example" {
+resource "azurerm_resource_group" "lizzy" {
   name     = "lizzyressource"
   location = "West Europe"
 
@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "example" {
   }
 }
 
-resource "azurerm_resource_group" "example" {
+resource "azurerm_resource_group" "bapt" {
   name     = "baptressource"
   location = "West Europe"
 
@@ -18,17 +18,17 @@ resource "azurerm_resource_group" "example" {
 }
 
 # Create a virtual network within the resource group
-resource "azurerm_virtual_network" "example" {
-  name                = "my-vnet"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
+resource "azurerm_virtual_network" "lizzy" {
+  name                = "lizzy-vnet"
+  resource_group_name = azurerm_resource_group.lizzy.name
+  location            = azurerm_resource_group.lizzy.location
   address_space       = ["10.0.0.0/16"]
 }
 
-resource "azurerm_subnet" "example" {
-  name                 = "example-subnet"
-  resource_group_name  = azurerm_resource_group.example.name
-  virtual_network_name = azurerm_virtual_network.example.name
+resource "azurerm_subnet" "lizzy" {
+  name                 = "lizzy-subnet"
+  resource_group_name  = azurerm_resource_group.lizzy.name
+  virtual_network_name = azurerm_virtual_network.lizzy.name
   address_prefixes     = ["10.0.1.0/24"]
 
   
@@ -36,17 +36,17 @@ resource "azurerm_subnet" "example" {
 
 
 # Create a virtual network within the resource group
-resource "azurerm_virtual_network" "example2" {
-  name                = "my-vnet2"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
+resource "azurerm_virtual_network" "bapt" {
+  name                = "bapt-vnet"
+  resource_group_name = azurerm_resource_group.bapt.name
+  location            = azurerm_resource_group.bapt.location
   address_space       = ["10.0.0.0/16"]
 }
 
-resource "azurerm_subnet" "example2" {
-  name                 = "example2-subnet"
-  resource_group_name  = azurerm_resource_group.example.name
-  virtual_network_name = azurerm_virtual_network.example.name
+resource "azurerm_subnet" "bapt" {
+  name                 = "bapt-subnet"
+  resource_group_name  = azurerm_resource_group.bapt.name
+  virtual_network_name = azurerm_virtual_network.bapt.name
   address_prefixes     = ["10.0.1.0/24"]
 
   
@@ -54,39 +54,39 @@ resource "azurerm_subnet" "example2" {
 
 # Define the network interface
 
-resource "azurerm_network_interface" "example-nic" {
-  name                = "example-nic"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+resource "azurerm_network_interface" "lizzy-nic" {
+  name                = "lizzy-nic"
+  location            = azurerm_resource_group.lizzy.location
+  resource_group_name = azurerm_resource_group.lizzy.name
 
   ip_configuration {
-    name                          = "example-ipcfg"
-    subnet_id                     = azurerm_subnet.example.id
+    name                          = "lizzy-ipcfg"
+    subnet_id                     = azurerm_subnet.lizzy.id
     private_ip_address_allocation = "Dynamic"
   }
 }
 
 # Define the network interface
 
-resource "azurerm_network_interface" "example-nic2" {
-  name                = "example-nic2"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+resource "azurerm_network_interface" "bapt-nic" {
+  name                = "bapt-nic"
+  location            = azurerm_resource_group.bapt.location
+  resource_group_name = azurerm_resource_group.bapt.name
 
   ip_configuration {
-    name                          = "example-ipcfg2"
-    subnet_id                     = azurerm_subnet.example.id
-    private_ip_address_allocation = "Dynamic2"
+    name                          = "bapt-ipcfg"
+    subnet_id                     = azurerm_subnet.bapt.id
+    private_ip_address_allocation = "Dynamic"
   }
 }
 
 # Define the virtual machine
-resource "azurerm_linux_virtual_machine" "vm" {
-  name                = "dtyryshkin-vm"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+resource "azurerm_linux_virtual_machine" "lizzyvm" {
+  name                = "lizzy-vm"
+  location            = azurerm_resource_group.lizzy.location
+  resource_group_name = azurerm_resource_group.lizzy.name
   network_interface_ids = [
-    azurerm_network_interface.example-nic.id,
+    azurerm_network_interface.lizzy-nic.id,
   ]
   size               = "Standard_DS1_v2"
   admin_username     = "username"
@@ -108,12 +108,12 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
 
 # Define the virtual machine
-resource "azurerm_linux_virtual_machine" "vm2" {
-  name                = "dtyryshkin-vm2"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+resource "azurerm_linux_virtual_machine" "baptvm" {
+  name                = "bapt-vm"
+  location            = azurerm_resource_group.bapt.location
+  resource_group_name = azurerm_resource_group.bapt.name
   network_interface_ids = [
-    azurerm_network_interface.example-nic.id,
+    azurerm_network_interface.bapt-nic.id,
   ]
   size               = "Standard_DS1_v2"
   admin_username     = "username"
