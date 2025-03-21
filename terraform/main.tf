@@ -8,6 +8,7 @@ resource "azurerm_resource_group" "lizzy" {
   }
 }
 
+#comment commit
 resource "azurerm_resource_group" "bapt" {
   name     = "baptressource"
   location = "West Europe"
