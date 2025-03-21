@@ -85,12 +85,12 @@ resource "azurerm_network_interface" "bapt-nic" {
 
 resource "azurerm_network_interface" "someone-nic" {
   name                = "somone-nic"
-  location            = azurerm_resource_group.bapt.location
-  resource_group_name = azurerm_resource_group.bapt.name
+  location            = azurerm_resource_group.lizzy.location
+  resource_group_name = azurerm_resource_group.lizzy.name
 
   ip_configuration {
     name                          = "someone-ipcfg"
-    subnet_id                     = azurerm_subnet.bapt.id
+    subnet_id                     = azurerm_subnet.lizzy.id
     private_ip_address_allocation = "Dynamic"
   }
 }
